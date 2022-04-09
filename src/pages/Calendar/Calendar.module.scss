@@ -1,0 +1,146 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1500px;
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 600px;
+    padding: 1rem;
+
+    &__button {
+      background: transparent;
+      border: 0;
+
+      &:hover {
+        cursor: pointer;
+        svg {
+          stroke-width: 5px;
+          stroke: #dd634e;
+        }
+      }
+    }
+  }
+
+  &__secondary-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 15px 0;
+    background: #282c34;
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+
+    &__button {
+      background: transparent;
+      border: 0;
+      margin: 0 1rem;
+      color: #f8f9fa;
+      font-size: 1.5rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      @media all and (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  &__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1;
+    padding: 0.5rem 0;
+    background: #282c34;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+
+    &__day {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f8f9fa;
+      font-size: 2rem;
+    }
+  }
+
+  &__dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+    width: 100%;
+
+    &__date {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 3px;
+      padding: 8px;
+      height: 200px;
+      max-height: 200px;
+      width: 200px;
+      overflow-y: auto;
+      border: 1px solid #282c34;
+      background-color: #f8f9fa;
+      font-size: 1.2rem;
+    }
+
+    &__date--header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    &__date--other {
+      background-color: #d3d3d3;
+    }
+
+    &__date--today {
+      background-color: #00ffbf;
+      font-weight: bold;
+    }
+
+    &__date--weekend {
+      color: #dd634e;
+    }
+
+    &__date--selected {
+      outline: 3px solid #dd634e;
+      border-radius: 6px;
+      z-index: 2;
+    }
+
+    &__date--reminder {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      min-height: 25px;
+      max-height: 25px;
+      padding: 5px;
+      border-radius: 6px;
+      border: 1px solid #dd634e;
+      font-size: 12px;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:focus {
+        z-index: 1;
+      }
+    }
+  }
+}
