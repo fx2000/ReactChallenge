@@ -1,9 +1,9 @@
-import Readme from "../components/Readme";
+import Calendar from './Calendar'
 
 function App() {
   return (
-    <div>
-      <Readme />
+    <div className={'home'}>
+      <Calendar />
     </div>
   );
 }
