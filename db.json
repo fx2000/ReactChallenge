@@ -1,0 +1,13 @@
+{
+  "reminders": [
+    {
+      "id": 0,
+      "title": "",
+      "date": "",
+      "time": "",
+      "description": "",
+      "woeid": "",
+      "city": ""
+    }
+  ]
+}
