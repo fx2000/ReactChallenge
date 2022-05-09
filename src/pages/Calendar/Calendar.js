@@ -1,11 +1,17 @@
 import React, {useState, useEffect, useRef} from 'react'
 import styles from './Calendar.module.scss'
+
+import Reminder from './Reminder'
+
 import {ReactComponent as ChevronLeft} from '../../assets/chevronLeft.svg'
 import {ReactComponent as ChevronRight} from '../../assets/chevronRight.svg'
+import {ReactComponent as CrossIcon} from '../../assets/cross.svg'
+
 import {getCalendarDates} from '../../utils/calendar.js'
+
 import {getReminders} from '../../services/calendarService.js'
+
 import {useClickOutside} from '../../hooks/useClickOutside.js'
-import Reminder from './Reminder'
 
 import {
   startOfWeek,
@@ -18,6 +24,9 @@ import {
   isWeekend
 } from 'date-fns'
 
+/**
+ * Main Calendar page
+ */
 const Calendar = () => {
   const today = new Date()
   const [selectedMonth, setSelectedMonth] = useState(today)
@@ -51,6 +60,7 @@ const Calendar = () => {
       }
     }
 
+    // Only fetch data if the reminder modal is closed
     if (!reminderModal) fetchData()
 
     return () => {
@@ -97,17 +107,21 @@ const Calendar = () => {
       {/* Controls */}
       <div className={styles['calendar__controls']}>
         <button
+          aria-label={'Previous month'}
           className={styles['calendar__controls__button']}
           onClick={() => prev()}
+          title={'Previous month'}
         >
-          <ChevronLeft />
+          <ChevronLeft aria-hidden="true" />
         </button>
         <h1>{format(selectedMonth, 'MMMM yyyy')}</h1>
         <button
+          aria-label={'Next month'}
           className={styles['calendar__controls__button']}
           onClick={() => next()}
+          title={'Next month'}
         >
-          <ChevronRight />
+          <ChevronRight aria-hidden="true" />
         </button>
       </div>
 
@@ -134,22 +148,37 @@ const Calendar = () => {
             key={index}
             onClick={() => setSelectedDate(element)}
           >
-            {format(element, 'd')}
-            {reminders?.map((reminder, index) => {
-              if (isSameDay(new Date(reminder?.date), element)) {
-                return (
-                  <div
-                    className={styles['calendar__dates__date--reminder']}
-                    key={index}
-                    role={'button'}
-                    onClick={() => editReminder(reminder)}
-                  >
-                    {reminder.title}
-                  </div>
-                )
-              }
-              return null
-            })}
+            <div className={styles['calendar__dates__date--header']}>
+              {format(element, 'd')}
+              {isSameDay(selectedDate, element) && (
+                <button
+                  aria-label={'Add reminder'}
+                  className={styles['calendar__dates__date--header__button']}
+                  onClick={() => addReminder()}
+                  title={'Add reminder'}
+                >
+                  <CrossIcon />
+                </button>
+              )}
+            </div>
+            {/* Reminders */}
+            <ul className={styles['calendar__dates__date--reminders']} >
+              {reminders?.map((reminder, index) => {
+                if (isSameDay(new Date(reminder?.date), element)) {
+                  return (
+                    <li key={index}>
+                      <button
+                        className={styles['calendar__dates__date--reminder']}
+                        onClick={() => editReminder(reminder)}
+                      >
+                        {reminder.title}
+                      </button>
+                    </li>
+                  )
+                }
+                return null
+              })}
+            </ul>
           </div>
         )}
       </div>
@@ -159,6 +188,7 @@ const Calendar = () => {
         <button
           className={styles['calendar__secondary-controls__button']}
           onClick={() => addReminder()}
+          title={'Add reminder'}
         >
           Add new reminder...
         </button>

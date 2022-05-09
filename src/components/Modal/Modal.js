@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useEffect} from 'react'
 import styles from './Modal.module.scss'
 import {ReactComponent as CloseIcon} from '../../assets/cross.svg'
 
@@ -22,6 +22,19 @@ const Modal = ({
   const accept = useCallback(() => {
     acceptCallback()
   }, [acceptCallback])
+
+  // Close modal when pressing ESC key
+  useEffect(() => {
+    const esc = (event) => {
+      if (event.key === 'Escape') close()
+    }
+
+    document.addEventListener('keydown', esc, false);
+
+    return () => {
+      document.removeEventListener('keydown', esc, false);
+    }
+  }, [])
 
   return (
     <div className={styles['modal__background']}>

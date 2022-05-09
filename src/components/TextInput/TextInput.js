@@ -1,6 +1,10 @@
 import React from 'react'
 import styles from './TextInput.module.scss'
 
+/**
+ * Standard text input component
+ * A ref is forwarded to the input element for compatibility with react-hook-form
+ */
 const TextInput = React.forwardRef(({
   label,
   name,
@@ -15,6 +19,8 @@ const TextInput = React.forwardRef(({
         {label}
       </label>
       <input
+        aria-label={label}
+        aria-required={required}
         className={styles['input__field']}
         type={type}
         name={name}

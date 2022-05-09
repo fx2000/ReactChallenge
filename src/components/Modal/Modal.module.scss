@@ -58,8 +58,18 @@
     position: absolute;
     top: 0;
     right: 0;
+
     svg {
       stroke: #ffff;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      svg {
+        stroke-width: 5px;
+        stroke: #fe5a1d;
+      }
     }
   }
 
