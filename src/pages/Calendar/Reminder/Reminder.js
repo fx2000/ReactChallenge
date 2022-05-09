@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import Modal from '../../../components/Modal'
 import styles from './Reminder.module.scss'
+
+import Modal from '../../../components/Modal'
 import TextInput from '../../../components/TextInput'
 import TextareaInput from '../../../components/TextareaInput'
-import {getWoeid, getWeatherLocationDate} from '../../../services/metaWeatherService'
-import {addReminder, editReminder} from '../../../services/calendarService'
-import {useForm} from 'react-hook-form'
 
+import {getWeather} from '../../../services/visualCrossingService'
+import {addReminder, editReminder} from '../../../services/calendarService'
+
+import {useForm} from 'react-hook-form'
 import {format} from 'date-fns'
 
 const Reminder = ({
@@ -23,12 +25,6 @@ const Reminder = ({
     // If it's an existing reminder, set the ID
     formData.id = selectedReminder?.id || null
 
-    // Get woeid value from Weather API if a city was specified
-    if (formData.city !== '') {
-      const {data} = await getWoeid(formData.city)
-      formData.woeid = data[0]?.woeid ?? null
-    }
-
     // Add/update reminder to Calendar API
     const reminderFunction = selectedReminder ? editReminder : addReminder
     const response = await reminderFunction(formData)
@@ -42,19 +38,18 @@ const Reminder = ({
   }
 
   useEffect(() => {
-    const fetchWeather = async (woeid, date) => {
-      const {data} = await getWeatherLocationDate(woeid, date)
-      setWeather(data[0])
+    const fetchWeather = async (city, date) => {
+      const {data} = await getWeather(city, date)
+      setWeather(data?.days[0] ?? null)
     }
 
     if (selectedReminder) {
-      fetchWeather(selectedReminder.woeid, format(new Date(selectedReminder.date), 'yyyy/M/dd'))
+      if (selectedReminder?.city) fetchWeather(selectedReminder?.city, format(new Date(selectedReminder.date), 'yyyy-M-dd'))
       reset({
-        title: selectedReminder.title,
-        description: selectedReminder.description,
-        date: selectedReminder.date,
-        city: selectedReminder.city,
-        woeid: selectedReminder.woeid
+        title: selectedReminder?.title,
+        description: selectedReminder?.description,
+        date: selectedReminder?.date,
+        city: selectedReminder?.city
       })
     }
   }, [selectedReminder, reset])

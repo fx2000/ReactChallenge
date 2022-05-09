@@ -38,8 +38,8 @@ const Modal = ({
         <div className={styles['modal__footer']}>
           {weather && (
             <div className={styles['modal__footer__weather']}>
-              <img src={`https://www.metaweather.com/static/img/weather/${weather.weather_state_abbr}.svg`} alt={'Weather forecast'} />
-              <h4>{weather?.weather_state_name}</h4>
+              <img src={`https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/1st%20Set%20-%20Color/${weather.icon}.svg`} alt={`${weather.conditions ?? 'Weather'} icon`} />
+              <h4>{weather.conditions ?? ''}</h4>
             </div>
           )}
           {acceptCallback && (

@@ -5,6 +5,6 @@ export const calendarApi = axios.create({
   proxy: 'https://enigmatic-shore-11880.herokuapp.com'
 })
 
-export const metaWeatherApi = axios.create({
-  baseURL: 'https://meta-weather.now.sh/api/'
+export const visualCrossingApi = axios.create({
+  baseURL: 'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/'
 })
