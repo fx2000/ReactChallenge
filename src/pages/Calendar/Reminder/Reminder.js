@@ -28,19 +28,20 @@ const Reminder = ({
     // Add/update reminder to Calendar API
     const reminderFunction = selectedReminder ? editReminder : addReminder
     const response = await reminderFunction(formData)
-    if (response.status === 201 || response.status === 200) {
+
+    if (response?.data) {
       reset({})
       setWeather(null)
       setReminderModal(false)
     } else {
-      setError('Unable to add reminder, please try again')
+      setError(`Unable to ${selectedReminder ? 'edit' : 'add'} reminder, please try again`)
     }
   }
 
   useEffect(() => {
     const fetchWeather = async (city, date) => {
-      const {data} = await getWeather(city, date)
-      setWeather(data?.days[0] ?? null)
+      const response = await getWeather(city, date)
+      setWeather(response?.data?.days[0] ?? null)
     }
 
     if (selectedReminder) {

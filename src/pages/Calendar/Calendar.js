@@ -9,6 +9,8 @@ import {ReactComponent as ChevronRight} from '../../assets/chevronRight.svg'
 
 import {getReminders} from '../../services/calendarService.js'
 
+import {sortReminders} from '../../utils/reminders.js'
+
 import {useWindowSize} from '../../hooks/useWindowSize'
 
 import {
@@ -39,7 +41,7 @@ const Calendar = () => {
       try {
         const {data} = await getReminders()
         if (!isCancelled) {
-          setReminders(data)
+          setReminders(sortReminders(data))
         }
       } catch (error) {
         throw new Error(error)

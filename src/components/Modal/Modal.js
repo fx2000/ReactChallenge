@@ -52,7 +52,7 @@ const Modal = ({
           {weather && (
             <div className={styles['modal__footer__weather']}>
               <img src={`https://raw.githubusercontent.com/visualcrossing/WeatherIcons/main/SVG/1st%20Set%20-%20Color/${weather.icon}.svg`} alt={`${weather.conditions ?? 'Weather'} icon`} />
-              <h4>{weather.conditions ?? ''}</h4>
+              <h3>{weather.conditions ?? ''}</h3>
             </div>
           )}
           <div className={styles['modal__footer__buttons']}>

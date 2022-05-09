@@ -1,17 +1,53 @@
 import {calendarApi} from '../config/api'
 
-export const getReminders = () => {
-  return calendarApi.get('reminders')
+export const getReminders = async () => {
+  try {
+    const response = await calendarApi.get('/reminders')
+    if (response.status === 201 || response.status === 200) {
+      return response
+    } else {
+      return null
+    }
+  } catch(error) {
+    throw new Error(error)
+  }
 }
 
-export const getRemindersByDate = (date) => {
-  return calendarApi.get(`reminders?date=${date}`)
+export const getRemindersByDate = async (date) => {
+  try {
+    const response = await calendarApi.get(`reminders?date=${date}`)
+    if (response.status === 201 || response.status === 200) {
+      return response
+    } else {
+      return null
+    }
+  } catch(error) {
+    throw new Error(error)
+  }
 }
 
-export const addReminder = (reminder) => {
-  return calendarApi.post('reminders', reminder)
+export const addReminder = async (reminder) => {
+  try {
+    const response = await calendarApi.post('reminders', reminder)
+    if (response.status === 201 || response.status === 200) {
+      return response
+    } else {
+      return null
+    }
+  } catch(error) {
+    throw new Error(error)
+  }
 }
 
-export const editReminder = (reminder) => {
-  return calendarApi.put(`reminders/${reminder?.id}`, reminder)
+export const editReminder = async (reminder) => {
+  try {
+    const response = await calendarApi.put(`reminders/${reminder?.id}`, reminder)
+    if (response.status === 201 || response.status === 200) {
+      return response
+    } else {
+      return null
+    }
+  } catch(error) {
+    throw new Error(error)
+  }
 }
