@@ -17,9 +17,7 @@
     align-items: center;
     position: absolute;
     z-index: 4;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(0, 50%);
     border-radius: 6px;
     min-width: 500px;
     min-height: 500px;
@@ -27,10 +25,11 @@
     padding: 0;
     border: 0;
 
-    @media all and (max-width: 500px) {
+    @media all and (max-width: 768px) {
       min-width: unset;
       width: 90%;
       max-width: 90vh;
+      transform: translate(0, 30%);
     }
   }
 
@@ -82,11 +81,17 @@
   &__footer {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
-    justify-content: flex-end;
     margin-top: 16px;
     width: 100%;
     padding: 16px;
+
+    @media all and (max-width: 768px) {
+      flex-direction: column;
+      gap: 30px;
+      margin-top: 0;
+    }
 
     &__weather {
       display: flex;
@@ -94,13 +99,26 @@
       justify-content: flex-start;
       gap: 10px;
       width: 100%;
+
+      img {
+        max-height: 45px;
+      }
+
+      @media all and (max-width: 768px) {
+        justify-content: center;
+      }
     }
 
-    img {
-      max-height: 45px;
+    &__buttons {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+      flex-wrap: wrap;
+      width: 100%;
     }
 
-    &__accept {
+    &__buttons--accept {
       cursor: pointer;
       background-color: #282c34;
       border-radius: 6px;
@@ -116,7 +134,7 @@
       }
     }
 
-    &__cancel {
+    &__buttons--cancel {
       cursor: pointer;
       background-color: #dd634e;
       border-radius: 6px;

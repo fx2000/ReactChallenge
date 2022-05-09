@@ -23,6 +23,22 @@ const getCalendarDates = (date) => {
   return dates
 }
 
+// Get dates in current calendar month
+const getDates = (date) => {
+  const startDate = startOfMonth(date)
+  const endDate = endOfMonth(date)
+  const dates = []
+  let currentDate = startDate
+
+  while (currentDate <= endDate) {
+    dates.push(currentDate)
+    currentDate = addDays(currentDate, 1)
+  }
+
+  return dates
+}
+
 export {
-  getCalendarDates
+  getCalendarDates,
+  getDates
 }

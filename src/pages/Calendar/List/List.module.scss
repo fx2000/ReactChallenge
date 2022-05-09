@@ -1,0 +1,121 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+
+  &__secondary-controls {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    width: 100%;
+
+    &__button {
+      background: transparent;
+      border: 0;
+      color: #282c34;
+      font-size: 1.5rem;
+
+      &:hover {
+        cursor: pointer;
+        color: #fe5a1d;
+      }
+    }
+  }
+
+  &__dates {
+    list-style: none;
+    padding: 0;
+
+    &__date {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #f8f9fa;
+      border: 1px solid #282c34;
+      margin: 5px 0;
+    }
+
+    &__date--header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 1rem;
+      padding: 5px;
+
+      h2 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      &__button {
+        border: 0;
+        background-color: transparent;
+
+        svg {
+          transform: rotate(45deg);
+          max-width: 16px;
+        }
+
+        &:hover {
+          cursor: pointer;
+
+          svg {
+            stroke-width: 5px;
+            stroke: #fe5a1d;
+          }
+        }
+      }
+    }
+
+    &__date--reminders {
+      padding: 0 5px 0;
+      list-style-type: none;
+      width: 100%;
+    }
+
+    &__date--today {
+      background-color: #b7d4d3;
+    }
+
+    &__date--weekend {
+      color: #ffffff;
+      background-color: #282c34;
+    }
+
+    &__date--selected {
+      border: 3px solid #fe5a1d;
+    }
+
+    &__date--reminder {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      min-height: 25px;
+      max-height: 25px;
+      padding: 5px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      font-size: 12px;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 5px 0;
+      background-color: transparent;
+      text-align: left;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #fe5a1d;
+        color: #ffffff;
+        border-color: transparent;
+      }
+
+      &:focus {
+        z-index: 1;
+      }
+    }
+  }
+}

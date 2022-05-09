@@ -55,21 +55,23 @@ const Modal = ({
               <h4>{weather.conditions ?? ''}</h4>
             </div>
           )}
-          {acceptCallback && (
-            <button
-              className={styles['modal__footer__accept']}
-              form={formId}
-              type={'submit'}
-              onClick={() => accept()}
-            >
-              {acceptLabel}
-            </button>
-          )}
-          {cancelCallback && (
-            <button className={styles['modal__footer__cancel']} type={'button'} onClick={() => close()}>
-              {cancelLabel}
-            </button>
-          )}
+          <div className={styles['modal__footer__buttons']}>
+            {acceptCallback && (
+              <button
+                className={styles['modal__footer__buttons--accept']}
+                form={formId}
+                type={'submit'}
+                onClick={() => accept()}
+              >
+                {acceptLabel}
+              </button>
+            )}
+            {cancelCallback && (
+              <button className={styles['modal__footer__buttons--cancel']} type={'button'} onClick={() => close()}>
+                {cancelLabel}
+              </button>
+            )}
+          </div>
         </div>
       </dialog>
     </div>
