@@ -24,5 +24,5 @@ Unit tests on all reusable components can be run using `npm test`
 
  - Run `npm install` | `yarn install` to install all dependencies.
  - Run `npm start`   | `yarn run` to run the app locally.
- - Run `npm test`   | `yarn run` to run the app locally.
+ - Run `npm test`   | `yarn test` to run unit tests.
  - You can find the project running on `localhost:3000` and the json server api on `localhost:3002`
