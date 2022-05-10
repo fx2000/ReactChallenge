@@ -1,4 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
+import PropTypes from 'prop-types'
 import styles from './Grid.module.scss'
 
 import Reminder from '../Reminder'
@@ -11,19 +12,22 @@ import {getCalendarDates} from '../../../utils/calendar.js'
 
 import {
   format,
-  isSameMonth,
   isSameDay,
+  isSameMonth,
   isWeekend
 } from 'date-fns'
 
+/**
+ * Grid layout Calendar page
+ */
 const Grid = ({
-  reminderModal,
-  setReminderModal,
-  selectedReminder,
   addReminder,
   editReminder,
-  selectedMonth,
+  reminderModal,
   reminders,
+  selectedMonth,
+  selectedReminder,
+  setReminderModal,
   weekdays
 }) => {
   const today = new Date()
@@ -43,8 +47,9 @@ const Grid = ({
     <article className={styles.grid}>
       <Reminder
         reminderModal={reminderModal}
-        setReminderModal={setReminderModal}
+        selectedDate={selectedDate}
         selectedReminder={selectedReminder}
+        setReminderModal={setReminderModal}
       />
 
       {/* Weekdays */}
@@ -93,7 +98,7 @@ const Grid = ({
                         className={styles['grid__dates__date--reminder']}
                         onClick={() => editReminder(reminder)}
                       >
-                        {reminder.title}
+                        <span>{reminder.title}</span>
                       </button>
                     </li>
                   )
@@ -117,6 +122,24 @@ const Grid = ({
       </div>
     </article>
   )
+}
+
+Grid.propTypes = {
+  addReminder: PropTypes.func.isRequired,
+  editReminder: PropTypes.func.isRequired,
+  reminderModal: PropTypes.bool.isRequired,
+  reminders: PropTypes.array,
+  selectedMonth: PropTypes.instanceOf(Date).isRequired,
+  selectedReminder: PropTypes.object,
+  setReminderModal: PropTypes.func.isRequired,
+  weekdays: PropTypes.array.isRequired
+}
+
+Grid.defaultProps = {
+  reminderModal: false,
+  reminders: [],
+  selectedReminder: {},
+  weekdays: []
 }
 
 export default Grid

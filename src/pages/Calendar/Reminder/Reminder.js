@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import PropTypes from 'prop-types'
 import styles from './Reminder.module.scss'
 
 import Modal from '../../../components/Modal'
@@ -13,6 +14,7 @@ import {format} from 'date-fns'
 
 const Reminder = ({
   reminderModal,
+  selectedDate,
   selectedReminder,
   setReminderModal
 }) => {
@@ -67,8 +69,8 @@ const Reminder = ({
             setReminderModal(false)
           }}
           cancelLabel={'Cancel'}
-          title={selectedReminder ? 'Reminder' : 'Add Reminder'}
           formId={'add-reminder-form'}
+          title={selectedReminder ? 'Reminder' : 'Add Reminder'}
           weather={weather}
         >
           {error && (
@@ -82,28 +84,33 @@ const Reminder = ({
             onSubmit={handleSubmit(onSubmit)}
           >
             <TextInput
+              id={'title'}
               label={'Title'}
-              name={'title'}
-              type={'text'}
-              required={true}
               maxLength={30}
+              name={'title'}
+              required={true}
+              type={'text'}
               {...register('title')}
             />
             <TextareaInput
+              id={'description'}
               label={'Description'}
+              maxLength={120}
               name={'description'}
               rows={5}
-              maxLength={120}
               {...register('description')}
             />
             <TextInput
+              id={'date'}
+              defaultValue={selectedDate ? format(selectedDate, "yyyy-MM-dd'T'HH:mm") : null}
               label={'Date & Time'}
               name={'date'}
-              type={'datetime-local'}
               required={true}
+              type={'datetime-local'}
               {...register('date')}
             />
             <TextInput
+              id={'city'}
               label={'City'}
               name={'city'}
               type={'text'}
@@ -114,6 +121,18 @@ const Reminder = ({
       )}
     </>
   )
+}
+
+Reminder.propTypes = {
+  reminderModal: PropTypes.bool.isRequired,
+  selectedDate: PropTypes.instanceOf(Date),
+  selectedReminder: PropTypes.object,
+  setReminderModal: PropTypes.func.isRequired
+}
+
+Reminder.defaultProps = {
+  reminderModal: false,
+  selectedReminder: {}
 }
 
 export default Reminder

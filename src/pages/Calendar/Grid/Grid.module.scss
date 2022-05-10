@@ -67,6 +67,14 @@
       border: 1px solid #282c34;
       background-color: #f8f9fa;
       font-size: 1.2rem;
+
+      @media all and (max-width: 1399px) and (min-width: 768px) {
+        min-width: 100px;
+      }
+
+      @media all and (min-width: 1400px) {
+        min-width: 200px;
+      }
     }
 
     &__date--header {
@@ -137,11 +145,14 @@
       border: 1px solid transparent;
       font-size: 12px;
       width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       margin: 5px 0;
       background-color: transparent;
+
+      span {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
 
       &:hover {
         cursor: pointer;

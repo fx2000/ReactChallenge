@@ -31,7 +31,7 @@ const Calendar = () => {
   const [reminders, setReminders] = useState([])
   const [reminderModal, setReminderModal] = useState(false)
   const [selectedMonth, setSelectedMonth] = useState(today)
-  const [selectedReminder, setSelectedReminder] = useState(null)
+  const [selectedReminder, setSelectedReminder] = useState({})
 
   // Get reminders from API
   useEffect(() => {

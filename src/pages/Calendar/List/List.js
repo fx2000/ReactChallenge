@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
+import PropTypes from 'prop-types'
 import styles from './List.module.scss'
 
 import Reminder from '../Reminder'
@@ -15,14 +16,17 @@ import {
   isWeekend
 } from 'date-fns'
 
+/**
+ * List layout Calendar page
+ */
 const List = ({
-  reminderModal,
-  setReminderModal,
-  selectedReminder,
   addReminder,
   editReminder,
+  reminderModal,
+  reminders,
   selectedMonth,
-  reminders
+  selectedReminder,
+  setReminderModal
 }) => {
   const today = new Date()
   const [selectedDate, setSelectedDate] = useState(null)
@@ -41,8 +45,9 @@ const List = ({
     <article className={styles.list}>
       <Reminder
         reminderModal={reminderModal}
-        setReminderModal={setReminderModal}
+        selectedDate={selectedDate}
         selectedReminder={selectedReminder}
+        setReminderModal={setReminderModal}
       />
 
       {/* Secondary Controls */}
@@ -106,6 +111,22 @@ const List = ({
       </ul>
     </article>
   )
+}
+
+List.propTypes = {
+  addReminder: PropTypes.func.isRequired,
+  editReminder: PropTypes.func.isRequired,
+  reminderModal: PropTypes.bool.isRequired,
+  reminders: PropTypes.array,
+  selectedMonth: PropTypes.instanceOf(Date).isRequired,
+  selectedReminder: PropTypes.object,
+  setReminderModal: PropTypes.func.isRequired
+}
+
+List.defaultProps = {
+  reminderModal: false,
+  reminders: [],
+  selectedReminder: {}
 }
 
 export default List
